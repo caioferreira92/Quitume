@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nosso Amor</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to right, #ffe6f0, #ffffff);
+      text-align: center;
+      color: #444;
+    }
+    header {
+      padding: 20px;
+      font-size: 2em;
+      color: #d6336c;
+    }
+    #timer {
+      font-size: 1.5em;
+      margin-bottom: 30px;
+    }
+    .carousel {
+      max-width: 90%;
+      margin: auto;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .carousel img {
+      width: 100%;
+      display: none;
+    }
+    .carousel img.active {
+      display: block;
+    }
+    audio {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Eu e Você, Sempre 💖
+  </header>
+
+  <div id="timer"></div>
+
+  <div class="carousel">
+    <img src="foto1.jpg" class="active">
+    <img src="foto2.jpg">
+    <img src="foto3.jpg">
+    <img src="foto4.jpg">
+    <img src="foto5.jpg">
+  </div>
+
+  <audio id="bg-music" autoplay loop controls>
+    <source src="everything.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio HTML5.
+  </audio>
+
+  <script>
+    const startDate = new Date("2008-12-03T14:30:00");
+    const timer = document.getElementById("timer");
+
+    function updateCounter() {
+      const now = new Date();
+      let diff = Math.floor((now - startDate) / 1000);
+
+      const years = Math.floor(diff / (365.25 * 24 * 3600));
+      diff %= Math.floor(365.25 * 24 * 3600);
+
+      const months = Math.floor(diff / (30.44 * 24 * 3600));
+      diff %= Math.floor(30.44 * 24 * 3600);
+
+      const days = Math.floor(diff / (24 * 3600));
+      diff %= 24 * 3600;
+
+      const hours = Math.floor(diff / 3600);
+      diff %= 3600;
+
+      const minutes = Math.floor(diff / 60);
+      const seconds = diff % 60;
+
+      timer.textContent = `Estamos juntos há ${years} anos, ${months} meses, ${days} dias, ${hours} horas, ${minutes} minutos e ${seconds} segundos.`;
+    }
+    setInterval(updateCounter, 1000);
+    updateCounter();
+
+    const imgs = document.querySelectorAll(".carousel img");
+    let index = 0;
+
+    setInterval(() => {
+      imgs[index].classList.remove("active");
+      index = (index + 1) % imgs.length;
+      imgs[index].classList.add("active");
+    }, 4000);
+  </script>
+</body>
+</html>
